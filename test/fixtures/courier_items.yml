@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  courier: one
+  description: MyString
+  weight_kg: 9.99
+  bhada: 9.99
+  hamali: 9.99
+  bilti_charge: 9.99
+  total: 9.99
+
+two:
+  courier: two
+  description: MyString
+  weight_kg: 9.99
+  bhada: 9.99
+  hamali: 9.99
+  bilti_charge: 9.99
+  total: 9.99

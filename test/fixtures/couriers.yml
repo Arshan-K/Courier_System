@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  courier_number: MyString
+  sender_id: 1
+  sender_address_id: 1
+  receiver_id: 1
+  receiver_address_id: 1
+  status: 1
+  payment_mode: 1
+  payment_status: 1
+  total_amount: 9.99
+  delivered_at: 2026-01-18 09:28:39
+
+two:
+  user: two
+  courier_number: MyString
+  sender_id: 1
+  sender_address_id: 1
+  receiver_id: 1
+  receiver_address_id: 1
+  status: 1
+  payment_mode: 1
+  payment_status: 1
+  total_amount: 9.99
+  delivered_at: 2026-01-18 09:28:39
