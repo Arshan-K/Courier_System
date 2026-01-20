@@ -132,6 +132,7 @@ export default function Entry() {
               label: "Sender Phone",
               required: true,
               value: senderForm.phone,
+              maxLength: 10,
               onChange: (e) =>
                 setSenderForm({ ...senderForm, phone: e.target.value }),
             },
@@ -169,6 +170,7 @@ export default function Entry() {
               label: "Receiver Phone",
               required: true,
               value: receiverForm.phone,
+              maxLength: 10,
               onChange: (e) =>
                 setReceiverForm({ ...receiverForm, phone: e.target.value }),
             },
@@ -339,6 +341,7 @@ function FormField({
   select,
   options = [],
   value,
+  maxLength,
   disabled,
   onChange,
 }) {
@@ -380,6 +383,7 @@ function FormField({
         <input
           className="input"
           placeholder={label}
+          maxLength={maxLength}
           disabled={disabled}
           readOnly={disabled}
           {...commonProps}
