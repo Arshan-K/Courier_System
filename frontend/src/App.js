@@ -5,6 +5,7 @@ import Entry from "./pages/Entry";
 import History from "./pages/History";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
+import CourierDetails from "./components/HistoryView.jsx";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/entry" element={<ProtectedRoute><Entry /></ProtectedRoute>} />
           <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
+          <Route path="/history/:courierNumber" element={<CourierDetails />} />
         </Route>
 
         {/* Default */}

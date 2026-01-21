@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
 export default function HistoryTable({ couriers }) {
+  const navigate = useNavigate();
+
   if (!couriers || couriers.length === 0) {
     return (
       <div className="bg-white border rounded p-6 text-center text-gray-500">
@@ -24,7 +27,7 @@ export default function HistoryTable({ couriers }) {
       <tbody>
         {couriers.map((c) => (
           <tr key={c.id} className="border-t text-sm">
-            <td className="p-3 font-medium">{c.courier_number}</td>
+            <td className="p-3 font-medium hover:text-blue-600" onClick={() => navigate(`/history/${c.courier_number}`)}>{c.courier_number}</td>
             <td className="p-3">{c.sender?.name}</td>
             <td className="p-3">{c.receiver?.name}</td>
             <td className="p-3">{c.courier_items.length}</td>

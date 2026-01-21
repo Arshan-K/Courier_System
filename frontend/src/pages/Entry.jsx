@@ -31,6 +31,8 @@ export default function Entry() {
     address: "",
   });
 
+  const [paymentMode, setPaymentMode] = useState("direct");
+
   useEffect(() => {
     if (senderSelected) return;
     if (senderQuery.length < 2) return;
@@ -77,7 +79,7 @@ export default function Entry() {
           line1: receiverForm.address
         }
       },
-      payment_mode: "direct",
+      payment_mode: paymentMode,
       courier_items: items.map(i => ({
         description: i.type,
         quantity: i.quantity,
@@ -102,6 +104,12 @@ export default function Entry() {
     "Food Items",
     "Fragile",
     "Other",
+  ];
+
+  const PAYMENT_MODES = [
+    { label: "Direct", value: "direct" },
+    { label: "End User", value: "end_user" },
+    { label: "Monthly", value: "monthly" },
   ];
 
   const total = Number(bhada || 0) + Number(hamali || 0) + BILTI;
@@ -201,8 +209,8 @@ export default function Entry() {
                 setReceiverForm({
                   name: c.name,
                   phone: c.phone,
-                  email: c.email,
-                  address: c.address,
+                  email: c.email || "",
+                  address: c.addresses?.[0]?.address || "",
                 });
                 setReceiverResults([]);
                 setReceiverSelected(true);
@@ -225,8 +233,8 @@ export default function Entry() {
                 setSenderForm({
                   name: c.name,
                   phone: c.phone,
-                  email: c.email,
-                  address: c.address,
+                  email: c.email || "",
+                  address: c.addresses?.[0]?.address || "",
                 });
                 setSenderResults([]);
                 setSenderSelected(true);
@@ -302,6 +310,15 @@ export default function Entry() {
               value={total}
               disabled
             />
+             {/* Payment Mode */}
+             <FormField
+                label="Payment Type"
+                required
+                select
+                options={PAYMENT_MODES.map((pm) => pm.value)}
+                value={paymentMode}
+                onChange={(e) => setPaymentMode(e.target.value)}
+              />
 
           </div>
         </div>

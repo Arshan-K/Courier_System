@@ -10,6 +10,7 @@ class Courier < ApplicationRecord
   has_many :courier_items, dependent: :destroy
   accepts_nested_attributes_for :courier_items
 
+  validates :courier_number, uniqueness: true
   before_create :generate_courier_number
 
   enum :status, {
@@ -33,7 +34,10 @@ class Courier < ApplicationRecord
 
   def generate_courier_number
     year = Time.current.year
-    count = Courier.where("courier_number LIKE ?", "CR-#{year}-%").count + 1
-    self.courier_number = "CR-#{year}-#{count.to_s.rjust(4, '0')}"
+    loop do
+      count = Courier.where("courier_number LIKE ?", "CR-#{year}-%").count + 1
+      self.courier_number = "CR-#{year}-#{count.to_s.rjust(4, '0')}"
+      break unless Courier.exists?(courier_number: courier_number)
+    end
   end
 end

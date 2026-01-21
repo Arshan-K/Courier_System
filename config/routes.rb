@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post "/login", to: "auth#login"
 
       get "dashboard", to: "dashboard#index"
+      get "couriers/:courier_number", to: "couriers#show"
 
       resources :clients do
         collection do

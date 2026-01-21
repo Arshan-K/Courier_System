@@ -9,4 +9,6 @@ class Client < ApplicationRecord
   has_many :received_couriers,
            class_name: "Courier",
            foreign_key: :receiver_id
+
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 end

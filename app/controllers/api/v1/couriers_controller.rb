@@ -16,10 +16,16 @@ class Api::V1::CouriersController < ApplicationController
 
   def show
     courier = current_user.couriers
-      .includes(:courier_items)
-      .find(params[:id])
+      .includes(:sender, :receiver, :courier_items)
+      .find_by!(courier_number: params[:courier_number])
 
-    render json: courier, include: :courier_items
+    render json: courier.as_json(
+      include: {
+        sender: { include: :addresses },
+        receiver: { include: :addresses },
+        courier_items: {}
+      }
+    )
   end
 
   def create
@@ -83,7 +89,7 @@ class Api::V1::CouriersController < ApplicationController
       name: data[:name],
       phone: data[:phone]
     )
-
+    client.email = data[:email] if data[:email].present?
     address = client.addresses.find_or_create_by!(
       address: data.dig(:address, :line1)
     )
