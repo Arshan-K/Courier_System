@@ -27,6 +27,11 @@ development:
   password: 1234
   host: localhost
   # database: <%= ENV['DATABASE_NAME'] %>
+  # username: <%= ENV["DATABASE_USERNAME"] %>
+  # password: <%= ENV["DATABASE_PASSWORD"] %>
+  # host: <%= ENV["DATABASE_HOST"] %>
+  # sslmode: require
+  # channelbinding: require
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
