@@ -91,9 +91,9 @@ export default function CourierDetails() {
         >
           Print
         </button>
-        <a onClick={downloadPdf} className="btn-success bg-green-600 text-white px-4 py-2 rounded" target="_blank" rel="noopener noreferrer">
+        <button onClick={downloadPdf} disabled={loading} className="btn-success bg-green-600 text-white px-4 py-2 rounded" target="_blank" rel="noopener noreferrer">
           {loading ? "Generating..." : "Download PDF"}
-        </a>
+        </button>
       </div>
     </div>
     <div className="print-area bg-white p-6">
