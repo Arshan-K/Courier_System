@@ -1,5 +1,5 @@
 class Api::V1::CouriersController < ApplicationController
-    before_action :authenticate_request!
+    before_action :authenticate_request!, except: [:pdf]
   def index
     couriers = current_user.couriers
       .includes(
@@ -26,6 +26,30 @@ class Api::V1::CouriersController < ApplicationController
         courier_items: {}
       }
     )
+  end
+
+  def pdf
+    @courier = Courier.includes(
+      :sender,
+      :receiver,
+      :sender_address,
+      :receiver_address,
+      :courier_items
+    ).find_by!(courier_number: params[:courier_number])
+
+    html = render_to_string(
+      template: "api/v1/couriers/pdf",
+      layout: false,
+      formats: [:html],
+      locals: { courier: @courier }
+    )
+
+    pdf = Grover.new(html, format: "A4", print_background: true).to_pdf
+
+    send_data pdf,
+      filename: "Courier-#{@courier.courier_number}.pdf",
+      type: "application/pdf",
+      disposition: "inline"
   end
 
   def create

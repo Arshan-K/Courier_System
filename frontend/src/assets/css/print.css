@@ -1,0 +1,88 @@
+@media print {
+  body {
+    margin: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Only print this area */
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;          /* A4 width */
+    min-height: 297mm;    /* A4 height */
+    padding: 10mm;
+    
+    /* SCALE to fit one page */
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  /* Prevent table breaking */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Reduce font sizes ONLY for print */
+  h2, h3 {
+    font-size: 14px !important;
+  }
+
+  p, td, th, label, input, textarea {
+    font-size: 11px !important;
+  }
+
+  textarea {
+    min-height: 50px !important;
+  }
+}
+
+@media print {
+  .grid {
+    display: flex !important;
+    gap: 6px !important;
+  }
+
+  .grid > div {
+    width: 50%;
+  }
+}
+
+@media print {
+  input, textarea {
+    padding: 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  textarea {
+    min-height: 35px !important;
+  }
+
+  .p-6 {
+    padding: 8px !important;
+  }
+
+  .p-5 {
+    padding: 6px !important;
+  }
+
+  .mt-6 {
+    margin-top: 6px !important;
+  }
+}
