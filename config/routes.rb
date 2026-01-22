@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
       get "dashboard", to: "dashboard#index"
       get "couriers/:courier_number", to: "couriers#show"
+      get "couriers/:courier_number/pdf", to: "couriers#pdf"
 
       resources :clients do
         collection do

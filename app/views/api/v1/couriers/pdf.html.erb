@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #111;
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #333;
+      margin-bottom: 16px;
+    }
+
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .box {
+      width: 48%;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: left;
+    }
+
+    th {
+      background: #f3f3f3;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h2>Courier Bill</h2>
+    <p>
+      Courier No: <strong><%= courier.courier_number %></strong><br>
+      Date: <%= courier.created_at.strftime("%d %b %Y") %><br>
+      Status: <%= courier.status.humanize %>
+    </p>
+  </div>
+
+  <!-- Sender / Receiver -->
+  <div class="section grid">
+    <div class="box">
+      <strong>Sender</strong><br>
+      <%= courier.sender.name %><br>
+      Phone: <%= courier.sender.phone %><br>
+      Address: <%= courier.sender.addresses.first&.address %>
+    </div>
+
+    <div class="box">
+      <strong>Receiver</strong><br>
+      <%= courier.receiver.name %><br>
+      Phone: <%= courier.receiver.phone %><br>
+      Address: <%= courier.receiver.addresses.first&.address %>
+    </div>
+  </div>
+
+  <!-- Items -->
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Weight (kg)</th>
+        <th>Bhada</th>
+        <th>Hamali</th>
+        <th>Bilti</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% courier.courier_items.each do |item| %>
+        <tr>
+          <td><%= item.description %></td>
+          <td><%= item.weight_kg %></td>
+          <td>₹<%= item.bhada %></td>
+          <td>₹<%= item.hamali %></td>
+          <td>₹<%= item.bilti_charge %></td>
+          <td>₹<%= (item.bhada.to_f + item.hamali.to_f + item.bilti_charge.to_f) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Summary -->
+  <div class="total">
+    Payment Mode: <%= courier.payment_mode.humanize %><br>
+    Payment Status: <%= courier.payment_status.humanize %><br>
+    Grand Total: ₹<%= courier.total_amount %>
+  </div>
+
+</body>
+</html>
