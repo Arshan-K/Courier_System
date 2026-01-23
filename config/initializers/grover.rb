@@ -8,6 +8,12 @@ Grover.configure do |config|
       right: '10mm'
     },
     print_background: true,
-    prefer_css_page_size: true
+    prefer_css_page_size: true,
+    executablePath: ENV.fetch("CHROME_PATH", "/usr/bin/chromium"),
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
+    ]
   }
 end

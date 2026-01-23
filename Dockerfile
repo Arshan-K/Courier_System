@@ -19,6 +19,7 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       curl \
       libjemalloc2 \
+      chromium \
       libvips \
       postgresql-client \
       nodejs \
@@ -34,6 +35,7 @@ RUN apt-get update -qq && \
       libgbm1 \
       libxkbcommon0 \
       libasound2 \
+      libxfixes3 \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
