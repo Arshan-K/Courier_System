@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { searchClients } from "../utils/clients";
 import { createCourier } from "../api/auth";
+import { useTranslation } from "react-i18next";
 
 export default function Entry() {
+  const { t } = useTranslation();
   const [senderQuery, setSenderQuery] = useState("");
   const [senderResults, setSenderResults] = useState([]);
   const [sender, setSender] = useState(null);
@@ -117,16 +119,16 @@ export default function Entry() {
   return (
     <>
       <h2 className="text-3xl font-bold text-[#1f3b52] mb-6 uppercase">
-        Create Courier
+        {t("createCourier")}
       </h2>
 
       {/* Sender & Receiver */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <InfoCard
-          title="Sender Info"
+          title={t("senderInfo")}
           fields={[
             {
-              label: "Sender Name",
+              label: t("senderName"),
               required: true,
               value: senderForm.name,
               onChange: (e) => {
@@ -137,7 +139,7 @@ export default function Entry() {
               },
             },
             {
-              label: "Sender Phone",
+              label: t("senderPhone"),
               required: true,
               value: senderForm.phone,
               maxLength: 10,
@@ -145,13 +147,13 @@ export default function Entry() {
                 setSenderForm({ ...senderForm, phone: e.target.value }),
             },
             {
-              label: "Sender Email",
+              label: t("senderEmail"),
               value: senderForm.email,
               onChange: (e) =>
                 setSenderForm({ ...senderForm, email: e.target.value }),
             },
             {
-              label: "Sender Address",
+              label: t("senderAddress"),
               textarea: true,
               value: senderForm.address,
               onChange: (e) =>
@@ -161,10 +163,10 @@ export default function Entry() {
         />
 
         <InfoCard
-          title="Receiver Info"
+          title={t("receiverInfo")}
           fields={[
             {
-              label: "Receiver Name",
+              label: t("receiverName"),
               required: true,
               value: receiverForm.name,
               onChange: (e) => {
@@ -175,7 +177,7 @@ export default function Entry() {
               },
             },
             {
-              label: "Receiver Phone",
+              label: t("receiverPhone"),
               required: true,
               value: receiverForm.phone,
               maxLength: 10,
@@ -183,13 +185,13 @@ export default function Entry() {
                 setReceiverForm({ ...receiverForm, phone: e.target.value }),
             },
             {
-              label: "Receiver Email",
+              label: t("receiverEmail"),
               value: receiverForm.email,
               onChange: (e) =>
                 setReceiverForm({ ...receiverForm, email: e.target.value }),
             },
             {
-              label: "Receiver Address",
+              label: t("receiverAddress"),
               textarea: true,
               value: receiverForm.address,
               onChange: (e) =>
@@ -252,7 +254,7 @@ export default function Entry() {
         {/* LEFT: Items */}
         <div className="lg:col-span-2 bg-white p-6 rounded border">
           <h3 className="text-lg font-semibold mb-5 uppercase">
-            Courier Items
+            {t("courierItems")}
           </h3>
 
          {items.map((item, index) => (
@@ -261,7 +263,7 @@ export default function Entry() {
               className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
             >
               <FormField
-                label="Courier Type"
+                label={t("courierType")}
                 required
                 select
                 options={COURIER_TYPES}
@@ -274,7 +276,7 @@ export default function Entry() {
               />
 
               <FormField
-                label="Quantity"
+                label={t("quantity")}
                 required
                 value={item.quantity}
                 onChange={(e) => {
@@ -287,7 +289,7 @@ export default function Entry() {
           ))}
 
           <button onClick={() => setItems([...items, { type: "", quantity: "" }])} className="inline-flex items-center gap-2 text-sm font-medium text-[#1f3b52]">
-            + Add New Item
+            + {t("addNewItem")}
           </button>
         </div>
 

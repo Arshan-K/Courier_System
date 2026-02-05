@@ -6,6 +6,7 @@ import History from "./pages/History";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
 import CourierDetails from "./components/HistoryView.jsx";
+import "./i18n";
 
 export default function App() {
   return (

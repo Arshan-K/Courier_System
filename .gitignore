@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+/node_modules/
 /frontend/.env
 
 # Ignore all logfiles and tempfiles.

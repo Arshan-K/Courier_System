@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchDashboard } from "../api/auth";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchDashboard()
@@ -18,20 +20,20 @@ export default function Dashboard() {
   return (
     <>
       <h2 className="text-2xl font-bold text-[#1f3b52] mb-6">
-        Dashboard
+        {t("dashboard")}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <StatCard
-          title="Total Deliveries"
+          title={t("Total Deliveries")}
           value={stats?.total_deliveries}
         />
         <StatCard
-          title="Pending"
+          title={t("Pending")}
           value={stats?.pending}
         />
         <StatCard
-          title="Delivered"
+          title={t("Delivered")}
           value={stats?.delivered}
         />
       </div>
